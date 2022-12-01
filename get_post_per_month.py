@@ -1,25 +1,17 @@
 from read_data import fromJson
 def get_post_per_month(data:dict)->dict:
-    count = {
-        12:0,
-        7:0,
-        8:0,
-        9:0,
-        10:0,
-        11:0,
-        6:0,
-    }
-    messages = data['messages']
-    for msg in messages:
-        if msg['type']=='message':
-            date=msg['date']
-            # Get month from date
-            
-            count[int(date[5:7])]+=1
-                
     
-    return count
-
+    k=0
+    a={}
+    for i in range(1,13):
+        j=0
+        for j in data['messages']:
+            if int(j['date'][5:7])<=i and j['type']=='message':
+                if int(j['date'][5:7])==i:
+                    k+=1
+        a[i]=k
+        k=0
+    return a
 
 # Path of the file to read
 file_path = "data/result.json"
